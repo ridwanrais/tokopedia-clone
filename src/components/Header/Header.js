@@ -1,11 +1,19 @@
+import { IconButton } from "@mui/material";
+import { Badge } from "@material-ui/core";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import React, { useState } from "react";
 import OutsideClickHandler from "react-outside-click-handler";
+import { Link } from "react-router-dom";
 
 import HeaderCategories from "./HeaderCategories";
+import styled from "styled-components";
+
 const navChildrenStyle =
   "grid place-items-center h-8 w-9 hover:bg-gray-200 cursor-pointer rounded-md";
 const profileChildrenStyle =
   "grid place-items-center h-10 w-16 hover:bg-gray-200 cursor-pointer rounded-md";
+
+const Container = styled.div`fixed top-0 z-50 bg-white bg-red-500 w-full`;
 
 function Header() {
   const [isShown, setIsShown] = useState(false);
@@ -20,15 +28,18 @@ function Header() {
         setIsShown(false);
       }}
     >
+      {/* <Container> */}
       <div className="fixed top-0 z-50 bg-white w-full">
         <div className="header h-16 flex items-center min-w-min shadow-md">
-          <div className="header__logo ml-7 cursor-pointer">
-            <img
-              className="max-w-none"
-              src="https://ecs7.tokopedia.net/assets-tokopedia-lite/v2/zeus/production/e5b8438b.svg"
-              alt="tokped logo"
-            />
-          </div>
+          <Link to="/">
+            <div className="header__logo ml-7 cursor-pointer">
+              <img
+                className="max-w-none"
+                src="https://ecs7.tokopedia.net/assets-tokopedia-lite/v2/zeus/production/e5b8438b.svg"
+                alt="tokped logo"
+              />
+            </div>
+          </Link>
 
           <button
             className="flex items-center h-9 space-x-1 ml-5 p-2 opacity-50 text-xs hover:text-green-600 hover:opacity-100 hover:font-bold focus:outline-none hover:bg-gray-200 focus:text-green-600 focus:opacity-100 focus:font-bold rounded-md"
@@ -64,16 +75,13 @@ function Header() {
           </div>
 
           <div className="header__nav flex items-center ml-4 h-6 w-36 justify-evenly border-r">
-            <div className={`header__cart ${navChildrenStyle}`}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 opacity-60"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
-              </svg>
-            </div>
+            <Link to="/cart">
+              <div className={`header__cart ${navChildrenStyle}`}>
+                <Badge badgeContent={4} color="error">
+                  <ShoppingCartIcon className="opacity-60" />
+                </Badge>
+              </div>
+            </Link>
 
             <div className={`header__notifications ${navChildrenStyle}`}>
               <svg
@@ -124,6 +132,7 @@ function Header() {
 
         {isShown && <HeaderCategories />}
       </div>
+      {/* </Container> */}
     </OutsideClickHandler>
   );
 }

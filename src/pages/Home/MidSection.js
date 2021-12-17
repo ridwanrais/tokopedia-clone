@@ -1,6 +1,8 @@
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import { useEffect, useState } from "react";
+// import NextArrow from "./../styles/NextArrow";
+// import PrevArrow from "./../styles/PrevArrow";
 
 function MidSection() {
   const categoryChoices = [
@@ -21,6 +23,42 @@ function MidSection() {
     slidesToScroll: 3,
     autoplay: false,
     easing: "cubic",
+    prevArrow: (
+      <div className="shadow-md rounded-full p-1 opacity-70 absolute">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15 19l-7-7 7-7"
+          />
+        </svg>
+      </div>
+    ),
+    nextArrow: (
+      <div className="shadow-md rounded-full p-1 opacity-70 absolute right-1/2">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 5l7 7-7 7"
+          />
+        </svg>
+      </div>
+    ),
   };
 
   const [topup, setTopup] = useState("");
@@ -37,8 +75,8 @@ function MidSection() {
 
   const isPhoneNumberEmpty = () => {
     return (
-      phoneNumber.toString().charAt(0) != 0 ||
-      phoneNumber.toString().charAt(1) != 8 ||
+      phoneNumber.toString().charAt(0) !== "0" ||
+      phoneNumber.toString().charAt(1) !== "8" ||
       phoneNumber.length < 4
     );
   };
@@ -104,7 +142,7 @@ function MidSection() {
                 <h5 className="text-sm opacity-80">Nominal</h5>
                 {topup === "Pulsa" ? (
                   <select
-                    className="h-9 w-full bg-transparent text-sm border-2 border-gray-300 border-opacity-75 rounded-xl px-3 opacity-50 cursor-pointer focus:outline-none focus:border-green-500 focus:opacity-100"
+                    className={`h-9 w-full bg-transparent text-sm border-2 border-gray-300 border-opacity-75 rounded-xl px-3 opacity-70 cursor-pointer focus:outline-none focus:border-green-500 focus:opacity-100 $`}
                     list="nominal"
                     disabled={isPhoneNumberEmpty()}
                     required
